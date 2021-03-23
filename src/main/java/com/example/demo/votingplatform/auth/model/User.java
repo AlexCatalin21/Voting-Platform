@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Entity @Table(name = "users")
@@ -23,4 +22,10 @@ public class User {
     private String lastName;
     @NotNull
     private String password;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "gender_id",referencedColumnName = "ID")
+    private UserGender gender;
+    @NotNull
+    private Date birthdate;
 }

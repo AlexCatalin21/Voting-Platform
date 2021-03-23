@@ -23,7 +23,7 @@ public class Candidate {
     @NotNull
     private Date birth_date;
     private String description;
-    private String electoral_speech;
-    private Long no_votes;
+    private String electoralSpeech;
+    private int noVotes=0;
 
 }

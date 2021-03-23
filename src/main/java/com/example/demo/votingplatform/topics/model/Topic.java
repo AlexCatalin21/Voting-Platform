@@ -20,6 +20,6 @@ public class Topic {
     @NotNull
     private String description;
 
-    private Long no_votes;
+    private int noVotes = 0;
 
 }
