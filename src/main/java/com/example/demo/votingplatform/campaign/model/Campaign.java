@@ -44,6 +44,9 @@ public class Campaign {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User ownerUser;
+    @ManyToMany
+    @JoinColumn(name = "voter_id", referencedColumnName = "ID")
+    private List<User> voters = new ArrayList<>();
 
 
 }
