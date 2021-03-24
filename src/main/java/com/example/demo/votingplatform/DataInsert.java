@@ -26,6 +26,5 @@ public class DataInsert {
         campaignType2.setType(CampaignType.Type.Topic);
         campaignTypeRepository.save(campaignType2);
 
-
     }
 }
