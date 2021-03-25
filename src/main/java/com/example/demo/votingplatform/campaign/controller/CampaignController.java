@@ -23,11 +23,17 @@ public class CampaignController {
     private final TopicService topicService;
 
     @PostMapping("/add-candidates-camp")
-    public ResponseEntity<String> addCabdidatesCampaign(@RequestBody CampaignDto campaignDto){
+    public ResponseEntity<String> addCandidatesCampaign(@RequestBody CampaignDto campaignDto){
         campaignService.addCandidatesCampaign(campaignDto);
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>("Candidates campaign succes", HttpStatus.OK);
 
 
+    }
+
+    @PostMapping("add-topic-camp")
+    public ResponseEntity<String> addTopicCampaign(@RequestBody CampaignDto campaignDto){
+        campaignService.addTopicCampaign(campaignDto);
+        return new ResponseEntity<>("Topic campaign succes",HttpStatus.OK);
     }
 
 
