@@ -49,4 +49,12 @@ public class Campaign {
     private List<User> voters = new ArrayList<>();
 
 
+    public void addCandidate(Candidate candidate){
+        candidates.add(candidate);
+    }
+
+    public void addTopic(Topic topic){
+        topics.add(topic);
+    }
+
 }

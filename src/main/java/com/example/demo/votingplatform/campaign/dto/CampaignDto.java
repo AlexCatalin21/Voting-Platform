@@ -9,9 +9,9 @@ import java.util.List;
 
 @Data
 public class CampaignDto {
-    private String name,description, campaignTypeId,password, confirmedPassword;
+    private String name,description,password, confirmedPassword;
     private Date startDate, expireDate;
-    private Long ownerUserId;
+    private Long ownerUserId, campaignTypeId;
     private List<CandidateDto> candidateDtoList;
     private List<TopicDto> topicDtoList;
 }
