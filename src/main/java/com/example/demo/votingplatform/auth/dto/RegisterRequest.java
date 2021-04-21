@@ -2,10 +2,10 @@ package com.example.demo.votingplatform.auth.dto;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class RegisterRequest {
     private String email,firstName,lastName,password,confirmPassword,genderID;
-    private Date birthDate;
+    private LocalDate birthDate;
 }

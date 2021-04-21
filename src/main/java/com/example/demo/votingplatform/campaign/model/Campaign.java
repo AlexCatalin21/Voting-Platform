@@ -9,22 +9,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Entity @Table(name="campaigns")
 public class Campaign {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     @NotNull
     private String name;
     @NotNull
+    @Future
     private Date startDate;
+    @Future
     @NotNull
     private Date expireDate;
     @NotNull

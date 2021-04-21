@@ -11,7 +11,7 @@ public class CandidateService {
         newCandidate.setFirst_name(candidateDto.getFirstName());
         newCandidate.setLast_name(candidateDto.getLastName());
         newCandidate.setBirth_date(candidateDto.getBirthdate());
-        newCandidate.setDescription(candidateDto.getDescription());
+        newCandidate.setDescription(candidateDto.getCandidateDescription());
         newCandidate.setElectoralSpeech(candidateDto.getElectoralSpeech());
         newCandidate.setNoVotes(0);
         return newCandidate;

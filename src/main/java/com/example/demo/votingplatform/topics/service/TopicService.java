@@ -9,9 +9,8 @@ public class TopicService {
 
     public Topic createTopicFromDto(Topic newTopic, TopicDto topicDto){
         newTopic.setName(topicDto.getName());
-        newTopic.setDescription(topicDto.getDescription());
+        newTopic.setDescription(topicDto.getTopicDescription());
         newTopic.setNoVotes(0);
         return newTopic;
     }
-
 }

@@ -4,13 +4,16 @@ import com.example.demo.votingplatform.auth.repository.UserGenderRepository;
 import com.example.demo.votingplatform.campaign.model.CampaignType;
 import com.example.demo.votingplatform.campaign.repository.CampaignTypeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @AllArgsConstructor
+
 public class DataInsert {
     private final UserGenderRepository userGenderRepository;
     private final CampaignTypeRepository campaignTypeRepository;
 
-    private void data_insert(){
+    public void data_insert(){
         UserGender userGender1 = new UserGender();
         userGender1.setGender(UserGender.Gender.Male);
         userGenderRepository.save(userGender1);

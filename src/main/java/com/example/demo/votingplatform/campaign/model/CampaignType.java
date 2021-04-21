@@ -18,6 +18,7 @@ public class CampaignType {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     @NotNull @Enumerated(EnumType.STRING)
     private Type type;

@@ -1,39 +1,27 @@
 package com.example.demo.votingplatform.campaign.controller;
 
 import com.example.demo.votingplatform.campaign.dto.CampaignDto;
+import com.example.demo.votingplatform.campaign.repository.CampaignTypeRepository;
 import com.example.demo.votingplatform.campaign.service.CampaignService;
-import com.example.demo.votingplatform.candidates.service.CandidateService;
-import com.example.demo.votingplatform.topics.service.TopicService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
-
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/campaign")
 public class CampaignController {
     private final CampaignService campaignService;
-    private final CandidateService candidateService;
-    private final TopicService topicService;
-
-    @PostMapping("/add-candidates-camp")
-    public ResponseEntity<String> addCandidatesCampaign(@RequestBody CampaignDto campaignDto){
-        campaignService.addCandidatesCampaign(campaignDto);
-        return new ResponseEntity<>("Candidates campaign succes", HttpStatus.OK);
+    private final CampaignTypeRepository campaignTypeRepository;
 
 
-    }
-
-    @PostMapping("add-topic-camp")
-    public ResponseEntity<String> addTopicCampaign(@RequestBody CampaignDto campaignDto){
-        campaignService.addTopicCampaign(campaignDto);
-        return new ResponseEntity<>("Topic campaign succes",HttpStatus.OK);
+    @PostMapping("/add-campaign")
+    public ResponseEntity<String> addCampaign(@RequestBody CampaignDto campaignDto){
+        campaignService.addCampaign(campaignDto,campaignTypeRepository.getOne(campaignDto.getCampaignTypeId()));
+        return new ResponseEntity<>("Candidates campaign success", HttpStatus.OK);
     }
 
 
