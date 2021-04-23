@@ -80,6 +80,6 @@ public class CampaignService {
         if (!campaignDto.getPassword().equals(campaignDto.getConfirmedPassword())) {
             return new ResponseEntity<>("Passwords don't match!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("Registration successful", HttpStatus.OK);
+        return new ResponseEntity<>("Campaign successful", HttpStatus.OK);
     }
 }

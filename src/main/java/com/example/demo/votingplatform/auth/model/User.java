@@ -9,9 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Entity @Table(name = "users")
