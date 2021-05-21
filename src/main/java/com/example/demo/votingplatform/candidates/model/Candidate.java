@@ -25,6 +25,6 @@ public class Candidate {
     private Date birth_date;
     private String description;
     private String electoralSpeech;
-    private int noVotes=0;
+    private int noVotes;
 
 }

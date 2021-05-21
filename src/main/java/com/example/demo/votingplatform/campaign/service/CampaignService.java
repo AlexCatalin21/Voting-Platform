@@ -4,6 +4,7 @@ import com.example.demo.votingplatform.auth.dto.RegisterRequest;
 import com.example.demo.votingplatform.auth.model.User;
 import com.example.demo.votingplatform.auth.repository.UserRepository;
 import com.example.demo.votingplatform.auth.service.UserService;
+import com.example.demo.votingplatform.campaign.dto.CampaignAccessDto;
 import com.example.demo.votingplatform.campaign.dto.CampaignDto;
 import com.example.demo.votingplatform.campaign.model.Campaign;
 import com.example.demo.votingplatform.campaign.model.CampaignType;
@@ -21,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -34,10 +34,10 @@ public class CampaignService {
     private final CampaignTypeRepository campaignTypeRepository;
     private final CandidateService candidateService;
     private final TopicService topicService;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public CampaignType getTypeById(Long Id) {
-        return campaignTypeRepository.getOne(Id);
+    public CampaignType getTypeById(String Id) {
+        return campaignTypeRepository.getOne(Long.valueOf(Id));
     }
 
 
@@ -49,15 +49,15 @@ public class CampaignService {
             campaign.setStartDate(campaignDto.getStartDate());
             campaign.setPassword(passwordEncoder.encode(campaignDto.getPassword()));
             campaign.setExpireDate(campaignDto.getExpireDate());
-//        campaign.setOwnerUser(userService.getUserById(campaignDto.getOwnerUserId()));
-            campaign.setType(getTypeById(campaignDto.getCampaignTypeId()));
-            if (campaignType.equals(getTypeById(campaignDto.getCampaignTypeId()))) {
+            campaign.setOwnerUser(userService.getUserById(campaignDto.getOwnerUserId()));
+            campaign.setType(getTypeById(String.valueOf(campaignDto.getCampaignTypeId())));
+            if (campaignType.equals(getTypeById("1"))) {
                 campaignDto.getCandidateDtoList().forEach(candidateDto -> {
                     Candidate candidate = candidateService.createCandidateFromDto(new Candidate(), candidateDto);
                     candidateRepository.save(candidate);
                     campaign.addCandidate(candidate);
                 });
-            } else if (campaignType.equals(getTypeById(campaignDto.getCampaignTypeId()))) {
+            } else if (campaignType.equals(getTypeById("2"))) {
                 campaignDto.getTopicDtoList().forEach(topicDto -> {
                     Topic topic = topicService.createTopicFromDto(new Topic(), topicDto);
                     topicRepository.save(topic);
@@ -82,4 +82,14 @@ public class CampaignService {
         }
         return new ResponseEntity<>("Campaign successful", HttpStatus.OK);
     }
+
+    public ResponseEntity<String> checkCampaignAccess(CampaignAccessDto campaignAccessDto) {
+        String errorMessage = "Invalid password";
+        Campaign campaign = campaignRepository.getOne(campaignAccessDto.getId());
+        if (!passwordEncoder.matches(campaignAccessDto.getPassword(), campaign.getPassword())) {
+            return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("You have access", HttpStatus.OK);
+    }
+
 }

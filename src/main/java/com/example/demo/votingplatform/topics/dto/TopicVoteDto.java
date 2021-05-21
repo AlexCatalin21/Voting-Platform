@@ -3,6 +3,7 @@ package com.example.demo.votingplatform.topics.dto;
 import lombok.Data;
 
 @Data
-public class TopicDto {
-    private String topicName, topicDescription;
+public class TopicVoteDto {
+
+    private String id;
 }

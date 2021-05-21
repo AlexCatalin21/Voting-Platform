@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class TopicService {
 
     public Topic createTopicFromDto(Topic newTopic, TopicDto topicDto){
-        newTopic.setName(topicDto.getName());
+        newTopic.setName(topicDto.getTopicName());
         newTopic.setDescription(topicDto.getTopicDescription());
         newTopic.setNoVotes(0);
         return newTopic;

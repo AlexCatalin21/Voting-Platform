@@ -46,6 +46,7 @@ public class Campaign {
     private List<Topic> topics = new ArrayList<>();
     @NotNull
     private String password;
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User ownerUser;
