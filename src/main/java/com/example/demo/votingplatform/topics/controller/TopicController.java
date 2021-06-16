@@ -1,8 +1,6 @@
 package com.example.demo.votingplatform.topics.controller;
 
 
-import com.example.demo.votingplatform.candidates.dto.CandidateVoteDto;
-import com.example.demo.votingplatform.candidates.model.Candidate;
 import com.example.demo.votingplatform.topics.dto.TopicVoteDto;
 import com.example.demo.votingplatform.topics.model.Topic;
 import com.example.demo.votingplatform.topics.repository.TopicRepository;

@@ -2,7 +2,7 @@ package com.example.demo.votingplatform.auth.controller;
 
 import com.example.demo.votingplatform.auth.dto.LoginRequest;
 import com.example.demo.votingplatform.auth.dto.RegisterRequest;
-import com.example.demo.votingplatform.auth.model.User;
+import com.example.demo.votingplatform.auth.model.AppUser;
 import com.example.demo.votingplatform.auth.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     @GetMapping("/get-user/{email}")
-    public User returnUser(@PathVariable String email ) {
+    public AppUser returnUser(@PathVariable String email ) {
         return userService.getUserByEmail(email);
     }
 }

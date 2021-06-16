@@ -1,8 +1,5 @@
 package com.example.demo.votingplatform.campaign.service;
 
-import com.example.demo.votingplatform.auth.dto.RegisterRequest;
-import com.example.demo.votingplatform.auth.model.User;
-import com.example.demo.votingplatform.auth.repository.UserRepository;
 import com.example.demo.votingplatform.auth.service.UserService;
 import com.example.demo.votingplatform.campaign.dto.CampaignAccessDto;
 import com.example.demo.votingplatform.campaign.dto.CampaignDto;
@@ -49,7 +46,7 @@ public class CampaignService {
             campaign.setStartDate(campaignDto.getStartDate());
             campaign.setPassword(passwordEncoder.encode(campaignDto.getPassword()));
             campaign.setExpireDate(campaignDto.getExpireDate());
-            campaign.setOwnerUser(userService.getUserById(campaignDto.getOwnerUserId()));
+            campaign.setOwnerAppUser(userService.getUserById(campaignDto.getOwnerUserId()));
             campaign.setType(getTypeById(String.valueOf(campaignDto.getCampaignTypeId())));
             if (campaignType.equals(getTypeById("1"))) {
                 campaignDto.getCandidateDtoList().forEach(candidateDto -> {

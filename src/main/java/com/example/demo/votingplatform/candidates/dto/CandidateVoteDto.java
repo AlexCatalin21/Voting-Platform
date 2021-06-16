@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class CandidateVoteDto {
-    private String id;
+    private String id, voterId, campaignId;
 }

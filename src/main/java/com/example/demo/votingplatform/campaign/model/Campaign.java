@@ -1,7 +1,7 @@
 package com.example.demo.votingplatform.campaign.model;
 
 
-import com.example.demo.votingplatform.auth.model.User;
+import com.example.demo.votingplatform.auth.model.AppUser;
 import com.example.demo.votingplatform.candidates.model.Candidate;
 import com.example.demo.votingplatform.topics.model.Topic;
 import com.sun.istack.NotNull;
@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,10 +48,10 @@ public class Campaign {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
-    private User ownerUser;
+    private AppUser ownerAppUser;
     @ManyToMany
     @JoinColumn(name = "voter_id", referencedColumnName = "ID")
-    private List<User> voters = new ArrayList<>();
+    private List<AppUser> voters = new ArrayList<>();
 
 
     public void addCandidate(Candidate candidate){
@@ -62,5 +61,7 @@ public class Campaign {
     public void addTopic(Topic topic){
         topics.add(topic);
     }
+
+    public void addVoter(AppUser voter) {voters.add(voter);}
 
 }
