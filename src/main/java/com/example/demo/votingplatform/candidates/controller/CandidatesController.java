@@ -1,7 +1,7 @@
 package com.example.demo.votingplatform.candidates.controller;
 
 
-import com.example.demo.votingplatform.auth.model.AppUser;
+import com.example.demo.votingplatform.auth.model.User;
 import com.example.demo.votingplatform.auth.repository.UserRepository;
 import com.example.demo.votingplatform.campaign.model.Campaign;
 import com.example.demo.votingplatform.campaign.repository.CampaignRepository;
@@ -28,9 +28,9 @@ public class CandidatesController {
     public ResponseEntity<String> voteCandidate(@RequestBody CandidateVoteDto candidateVoteDto){
         System.out.println(candidateVoteDto);
         Campaign campaign = campaignRepository.getOne(Long.valueOf(candidateVoteDto.getCampaignId()));
-        for(AppUser appUser : campaign.getVoters()){
-            if(appUser.equals(userRepository.getOne(Long.valueOf(candidateVoteDto.getVoterId())))){
-                System.out.println("This appUser already voted!");
+        for(User user : campaign.getVoters()){
+            if(user.equals(userRepository.getOne(Long.valueOf(candidateVoteDto.getVoterId())))){
+                System.out.println("This user already voted!");
                 return new ResponseEntity<>("You already voted!" ,HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }

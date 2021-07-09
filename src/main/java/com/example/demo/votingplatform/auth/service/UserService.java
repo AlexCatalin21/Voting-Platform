@@ -2,7 +2,7 @@ package com.example.demo.votingplatform.auth.service;
 
 import com.example.demo.votingplatform.auth.dto.LoginRequest;
 import com.example.demo.votingplatform.auth.dto.RegisterRequest;
-import com.example.demo.votingplatform.auth.model.AppUser;
+import com.example.demo.votingplatform.auth.model.User;
 import com.example.demo.votingplatform.auth.model.UserGender;
 import com.example.demo.votingplatform.auth.repository.UserGenderRepository;
 import com.example.demo.votingplatform.auth.repository.UserRepository;
@@ -24,10 +24,10 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public AppUser getUserById(Long Id){
+    public User getUserById(Long Id){
         return userRepository.getOne(Id);
     }
-    public AppUser getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userRepository.getByEmail(email);
     }
 
@@ -35,29 +35,29 @@ public class UserService {
     public ResponseEntity<String> register(RegisterRequest request){
         ResponseEntity<String> validation = validateRegister(request);
         if (validation.getStatusCode().equals(HttpStatus.OK)) {
-            AppUser newAppUser = createUserFromRequest(request);
+            User newUser = createUserFromRequest(request);
             userRepository.flush();
-            userRepository.save(newAppUser);
+            userRepository.save(newUser);
 
         }
         return validation;
     }
 
-    private AppUser createUserFromRequest(RegisterRequest request) {
-        AppUser appUser = new AppUser();
+    private User createUserFromRequest(RegisterRequest request) {
+        User user = new User();
         UserGender userGender = userGenderRepository.getOne(Long.valueOf(request.getGenderID()));
-        appUser.setEmail(request.getEmail());
-        appUser.setBirthdate(request.getBirthDate());
-        appUser.setFirstName(request.getFirstName());
-        appUser.setLastName(request.getLastName());
-        appUser.setPassword(passwordEncoder.encode(request.getPassword()));
-        appUser.setGender(userGender);
-        return appUser;
+        user.setEmail(request.getEmail());
+        user.setBirthdate(request.getBirthDate());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setGender(userGender);
+        return user;
     }
 
     private ResponseEntity<String> validateRegister(RegisterRequest request) {
-        AppUser appUserOptional = getUserByEmail(request.getEmail());
-        if (appUserOptional != null) {
+        User userOptional = getUserByEmail(request.getEmail());
+        if (userOptional != null) {
             return new ResponseEntity<>("Email already exists!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (!request.getPassword().equals(request.getConfirmPassword())) {
@@ -70,19 +70,19 @@ public class UserService {
     public ResponseEntity<String> login(LoginRequest request, HttpSession session) {
         ResponseEntity<String> validation = validateLogin(request);
         if (validation.getStatusCode().equals(HttpStatus.OK)) {
-            AppUser appUser = getUserByEmail(request.getEmail());
-            session.setAttribute("user", appUser);
+            User user = getUserByEmail(request.getEmail());
+            session.setAttribute("user", user);
         }
         return validation;
     }
 
     private ResponseEntity<String> validateLogin(LoginRequest request) {
         String errorMessage = "Invalid credentials";
-        AppUser appUserOptional = getUserByEmail(request.getEmail());
-        if (appUserOptional == null) {
+        User userOptional = getUserByEmail(request.getEmail());
+        if (userOptional == null) {
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if (!passwordEncoder.matches(request.getPassword(), appUserOptional.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), userOptional.getPassword())) {
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("Login successful", HttpStatus.OK);

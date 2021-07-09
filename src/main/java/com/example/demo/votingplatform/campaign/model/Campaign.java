@@ -1,7 +1,7 @@
 package com.example.demo.votingplatform.campaign.model;
 
 
-import com.example.demo.votingplatform.auth.model.AppUser;
+import com.example.demo.votingplatform.auth.model.User;
 import com.example.demo.votingplatform.candidates.model.Candidate;
 import com.example.demo.votingplatform.topics.model.Topic;
 import com.sun.istack.NotNull;
@@ -48,10 +48,10 @@ public class Campaign {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "ID")
-    private AppUser ownerAppUser;
+    private User ownerUser;
     @ManyToMany
     @JoinColumn(name = "voter_id", referencedColumnName = "ID")
-    private List<AppUser> voters = new ArrayList<>();
+    private List<User> voters = new ArrayList<>();
 
 
     public void addCandidate(Candidate candidate){
@@ -62,6 +62,12 @@ public class Campaign {
         topics.add(topic);
     }
 
-    public void addVoter(AppUser voter) {voters.add(voter);}
+    public void addVoter(User voter) {voters.add(voter);}
+
+    public List<User> getVoters(){
+        return voters;
+    }
+
+
 
 }

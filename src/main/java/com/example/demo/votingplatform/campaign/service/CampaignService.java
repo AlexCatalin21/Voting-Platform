@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
@@ -46,7 +48,7 @@ public class CampaignService {
             campaign.setStartDate(campaignDto.getStartDate());
             campaign.setPassword(passwordEncoder.encode(campaignDto.getPassword()));
             campaign.setExpireDate(campaignDto.getExpireDate());
-            campaign.setOwnerAppUser(userService.getUserById(campaignDto.getOwnerUserId()));
+            campaign.setOwnerUser(userService.getUserById(campaignDto.getOwnerUserId()));
             campaign.setType(getTypeById(String.valueOf(campaignDto.getCampaignTypeId())));
             if (campaignType.equals(getTypeById("1"))) {
                 campaignDto.getCandidateDtoList().forEach(candidateDto -> {
@@ -87,6 +89,18 @@ public class CampaignService {
             return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("You have access", HttpStatus.OK);
+    }
+
+    public Candidate getWinner(String campaign_id){
+        Campaign campaign = campaignRepository.getOne(Long.valueOf(campaign_id));
+        List<Candidate> candidates = campaign.getCandidates();
+        Candidate winner= candidates.get(0);
+        for(Candidate candidate: candidates){
+            if(candidate.getNoVotes() > winner.getNoVotes()){
+                winner=candidate;
+            }
+        }
+        return winner;
     }
 
 }
