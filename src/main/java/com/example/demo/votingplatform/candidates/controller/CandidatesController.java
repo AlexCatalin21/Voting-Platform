@@ -26,7 +26,6 @@ public class CandidatesController {
 
     @PutMapping("/vote")
     public ResponseEntity<String> voteCandidate(@RequestBody CandidateVoteDto candidateVoteDto){
-        System.out.println(candidateVoteDto);
         Campaign campaign = campaignRepository.getOne(Long.valueOf(candidateVoteDto.getCampaignId()));
         for(User user : campaign.getVoters()){
             if(user.equals(userRepository.getOne(Long.valueOf(candidateVoteDto.getVoterId())))){

@@ -27,8 +27,8 @@ public class CampaignController {
     private final CampaignRepository campaignRepository;
     private final UserRepository userRepository;
 
-    private User getUserById(Long Id){
-        return userRepository.getOne(Id);
+    private User getUserById(Long id){
+        return userRepository.getOne(id);
 
     }
 
@@ -52,26 +52,26 @@ public class CampaignController {
     }
 
 
-    @GetMapping("get-campaigns/{user_id}")
-    public List<Campaign> getUserCampaigns(@PathVariable String user_id){
-        User user=getUserById(Long.valueOf(user_id));
+    @GetMapping("get-campaigns/{userId}")
+    public List<Campaign> getUserCampaigns(@PathVariable String userId){
+        User user=getUserById(Long.valueOf(userId));
         return campaignRepository.findAllByOwnerUser(user);
     }
 
 
     @PostMapping("/check-campaign-password")
-    public ResponseEntity checkCampaignPassword(@RequestBody CampaignAccessDto campaignAccessDto){
+    public ResponseEntity<String> checkCampaignPassword(@RequestBody CampaignAccessDto campaignAccessDto){
         return campaignService.checkCampaignAccess(campaignAccessDto);
     }
 
-    @GetMapping("get-Voters/{campaign_id}")
-    public List<User> getCampaignVoters(@PathVariable String campaign_id){
-        return getCampaignById(campaign_id).getVoters();
+    @GetMapping("get-Voters/{campaignId}")
+    public List<User> getCampaignVoters(@PathVariable String campaignId){
+        return getCampaignById(campaignId).getVoters();
     }
 
-    @GetMapping("/winner/{campaign_id)")
-    public Candidate getWinnerCandidate(@PathVariable String campaign_id){
-        return campaignService.getWinner(campaign_id);
+    @GetMapping("/winner/{campaignId)")
+    public Candidate getWinnerCandidate(@PathVariable String campaignId){
+        return campaignService.getWinner(campaignId);
     }
 
 }

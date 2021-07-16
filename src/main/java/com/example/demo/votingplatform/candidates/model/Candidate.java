@@ -1,12 +1,13 @@
 package com.example.demo.votingplatform.candidates.model;
 
-import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.util.Date;
 
@@ -15,14 +16,14 @@ import java.util.Date;
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     @NotNull
-    private String first_name;
+    private String firstName;
     @NotNull
-    private String last_name;
+    private String lastName;
     @NotNull
     @PastOrPresent
-    private Date birth_date;
+    private Date birthDate;
     private String description;
     private String electoralSpeech;
     private int noVotes;

@@ -24,8 +24,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public User getUserById(Long Id){
-        return userRepository.getOne(Id);
+    public User getUserById(Long id){
+        return userRepository.getOne(id);
     }
     public User getUserByEmail(String email) {
         return userRepository.getByEmail(email);

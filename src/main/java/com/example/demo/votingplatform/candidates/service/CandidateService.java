@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 public class CandidateService {
 
     public Candidate createCandidateFromDto(Candidate newCandidate,CandidateDto candidateDto){
-        newCandidate.setFirst_name(candidateDto.getFirstName());
-        newCandidate.setLast_name(candidateDto.getLastName());
-        newCandidate.setBirth_date(candidateDto.getBirthdate());
+        newCandidate.setFirstName(candidateDto.getFirstName());
+        newCandidate.setLastName(candidateDto.getLastName());
+        newCandidate.setBirthDate(candidateDto.getBirthdate());
         newCandidate.setDescription(candidateDto.getCandidateDescription());
         newCandidate.setElectoralSpeech(candidateDto.getElectoralSpeech());
         newCandidate.setNoVotes(0);

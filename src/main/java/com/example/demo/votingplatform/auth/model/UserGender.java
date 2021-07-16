@@ -17,7 +17,7 @@ public class UserGender {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long id;
     @Enumerated(EnumType.STRING)
     private Gender gender;
 }
