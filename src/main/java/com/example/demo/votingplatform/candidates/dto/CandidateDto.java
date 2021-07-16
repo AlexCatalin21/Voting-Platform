@@ -6,6 +6,9 @@ import java.util.Date;
 
 @Data
 public class CandidateDto {
-    private String firstName, lastName, candidateDescription, electoralSpeech;
+    private String firstName;
+    private String lastName;
+    private String candidateDescription;
+    private String electoralSpeech;
     private Date birthdate;
 }
